@@ -28,7 +28,7 @@
     }
 
     function onClick() {
-      subWindow = window.open('/sub.html', null, 'width=500,height=500,toolbar=yes,menubar=yes,scrollbars=yes');
+      subWindow = window.open('sub.html', null, 'width=500,height=500,toolbar=no,menubar=no,scrollbars=yes');
 
       subWindow.addEventListener('beforeunload', () => {
         window.alert('小画面が閉じられました。');
