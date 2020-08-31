@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>サブページ</h1>
+  <div>
+    <button onclick="changeCount(window.opener.count - 1)">-</button>
+    <span id="count"></span>
+    <button onclick="changeCount(window.opener.count + 1)">+</button>
+  </div>
+  <button onclick="onClick()">close</button>
+  <script>
+    function updateCount() {
+      document.getElementById('count').innerText = window.opener.count;
+      window.opener.updateCount();
+    }
+
+    function changeCount(count) {
+      window.opener.count = count;
+      updateCount();
+    }
+
+    function onClick() {
+      window.close();
+    }
+
+    updateCount();
+  </script>
+</body>
+</html>

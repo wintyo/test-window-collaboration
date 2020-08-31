@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>メインページ</h1>
+  <div>
+    <button onclick="changeCount(window.count - 1)">-</button>
+    <span id="count"></span>
+    <button onclick="changeCount(window.count + 1)">+</button>
+  </div>
+  <button onclick="onClick()">open</button>
+  <script>
+    window.count = 10;
+    let subWindow;
+
+    function updateCount() {
+      document.getElementById('count').innerText = window.count;
+    }
+
+    function changeCount(count) {
+      window.count = count;
+      updateCount();
+      subWindow && subWindow.updateCount();
+    }
+
+    function onClick() {
+      subWindow = window.open('/sub.html', null, 'width=500,height=500,toolbar=yes,menubar=yes,scrollbars=yes');
+
+      subWindow.addEventListener('beforeunload', () => {
+        window.alert('小画面が閉じられました。');
+        subWindow = undefined;
+      });
+
+      // なぜか開いた時にもイベントが発生する
+      // subWindow.addEventListener('unload', () => {
+      //   console.log('unload', subWindow.closed);
+      //   if (subWindow.closed) {
+      //     window.alert('小画面が閉じられました。');
+      //   }
+      // });
+    }
+
+    updateCount();
+  </script>
+</body>
+</html>
